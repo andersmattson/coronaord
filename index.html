@@ -120,23 +120,6 @@
     <script src="subtitles.js"></script>
     <script src="words.js"></script>
     <script type="text/javascript">
-      function handleClientLoad() {
-        gapi.load('client:auth2', initClient);
-      }
-
-      function initClient() {
-        gapi.client.init({
-          apiKey: 'AIzaSyDoMIrTgFzs3q0_ZBteEEpKBurfwrZGNdA',
-          clientId: '393696881968-s2at0i1rb2e7jgc8ucvsroddg6fejkuo.apps.googleusercontent.com',
-          discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-          scope: "https://www.googleapis.com/auth/spreadsheets.readonly"
-        }).then(function () {
-            listWords();
-        }, function(error) {
-          appendWord(JSON.stringify(error, null, 2));
-        });
-      }
-
       function appendWord(message) {
         var pre = document.getElementById('content');
         var textContent = document.createElement('a');
@@ -144,28 +127,6 @@
         textContent.setAttribute("target", "_blank");
         textContent.innerHTML = message.replace(/^Corona/i, "");
         pre.appendChild(textContent);
-      }
-
-      function listWords() {
-        gapi.client.sheets.spreadsheets.values.get({
-          spreadsheetId: '10TJIXc0PR3FKPjlSdurOxAHVydyKnajivu52ZvKcGXI',
-          range: 'Blad1!A:A',
-        }).then(function(response) {
-          var range = response.result;
-          if (range.values.length > 0) {
-            for (i = 0; i < range.values.length; i++) {
-              appendWord(range.values[i][0]);
-            }
-
-            let total = document.querySelector("#total");
-            total.innerHTML = range.values.length;
-
-          } else {
-              // Something went wrong.
-          }
-        }, function(response) {
-          appendWord('Error: ' + response.result.error.message);
-        });
       }
 
       function listLocalWords(){
@@ -177,13 +138,6 @@
             total.innerHTML = allWords.length;
       }
 
-    </script>
-
-    <!--script async defer src="https://apis.google.com/js/api.js"
-      onload="this.onload=function(){};handleClientLoad()"
-      onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script-->
-    <script>
       document.querySelector("#content").addEventListener("scroll", function(ev){
         document.querySelector("#current").innerHTML = Math.floor(1+ ev.target.scrollTop/72);
       });
