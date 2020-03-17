@@ -28,14 +28,15 @@
       }
 
       h1 {
-        font-size: 40px;
-        position: absolute;
-        left: 50px;
+        font-size: 45px;
         color: #eee;
+        margin-bottom: 10px;
+        margin-top: 0px;
       }
 
       #leftside {
         position: absolute;
+        box-sizing: border-box;
         right: 50%;
         top: 0;
         left: 0;
@@ -87,18 +88,36 @@
         font-size: 30px;
         font-weight: normal;
       }
+
+      #subtitle {
+        font-weight: normal;
+        font-size: 20px;
+        margin-bottom: 30px;
+        max-width: 300px;
+        line-height: 1.4em;
+      }
+
+      #titles {
+        padding: 50px;
+        position: absolute;
+      }
+
     </style>
   </head>
   <body>
-    <h1>CORONAORD <br> <span id="count"><span id="current">1</span>/<span id="total">#</span></span></h1>
     <div id="leftside">
+      <div id="titles">
+        <h1>CORONAORD</h1>
+        <div id="subtitle">&nbsp;</div>
+        <div id="count">No. <span id="current">1</span> av <span id="total">#</span></div>
+      </div>
       <div id="corona">Corona</div>
     </div>
     <div id="rightside">
       <div id="content"></div>
     </div>
     
-
+    <script src="subtitles.js"></script>
     <script type="text/javascript">
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -157,6 +176,11 @@
     <script>
       document.querySelector("#content").addEventListener("scroll", function(ev){
         document.querySelector("#current").innerHTML = Math.floor(1+ ev.target.scrollTop/72);
+      });
+
+      window.addEventListener("load", function(){
+        let rand = Math.floor(Math.random()*subTitles.length);
+        document.querySelector("#subtitle").innerHTML = subTitles[ rand ];
       });
     </script>
   </body>
