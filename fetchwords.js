@@ -6,5 +6,6 @@ let url = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR0EpMvH-hxN0CMQm891Z
 request( url, function(error, response, body){
     let words = body.split('\r\n');
     let json = "var allWords = " + JSON.stringify(words);
+    console.log(json);
     fs.writeFileSync("dist/words.js", json );
 });
