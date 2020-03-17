@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160865636-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-160865636-1');
+    </script>
+    <title>Coronaord</title>
+    <meta charset="utf-8" />
+    <meta property="og:title" content="Coronaord - en samling sammansatta kvällspostord.">
+    <meta property="og:description" content="SAOL kommer att ha fullt upp inför nästa revision.">
+    <meta property="og:image" content="http://coronaord.se/thumbnail.jpg">
+    <meta property="og:url" content="http://coronaord.se/index.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <style>
+      body, html {
+        font-family: Helvetica, Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+      }
+
+      h1 {
+        font-size: 45px;
+        color: #eee;
+        margin-bottom: 10px;
+        margin-top: 0px;
+      }
+
+      #leftside {
+        position: absolute;
+        box-sizing: border-box;
+        right: 50%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+      }
+
+      #rightside {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        bottom: 0;
+        right: 0;
+      }
+
+      #corona {
+        right: 0;
+        text-align: right;
+        color: #900;
+        margin-top: 50vh;
+        margin-right: 3px;
+      }
+
+      #content, #corona {
+        font-size: 60px;
+        line-height: 1.2em;
+      }
+
+      #content {
+        scroll-snap-type: y mandatory;
+        overflow: auto;
+        max-height: 100%;
+        scroll-padding-top: 50vh;
+      }
+      #content a {
+        scroll-snap-align: start;
+        display: block;
+        color: #fff;
+        text-decoration: none;
+      }
+      #content a:first-child {
+        margin-top: 50vh;
+      }
+
+      #content a:last-child {
+        margin-bottom: calc(50vh - 1.2em);
+      }
+
+      #count {
+        font-size: 30px;
+        font-weight: normal;
+      }
+
+      #subtitle {
+        font-weight: normal;
+        font-size: 20px;
+        margin-bottom: 30px;
+        max-width: 300px;
+        line-height: 1.4em;
+      }
+
+      #titles {
+        padding: 50px;
+        position: absolute;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="leftside">
+      <div id="titles">
+        <h1>CORONAORD</h1>
+        <div id="subtitle">&nbsp;</div>
+        <div id="count">No. <span id="current">1</span> av <span id="total">#</span></div>
+      </div>
+      <div id="corona">Corona</div>
+    </div>
+    <div id="rightside">
+      <div id="content"></div>
+    </div>
+    
+    <script src="subtitles.js"></script>
+    <script src="words.js"></script>
+    <script type="text/javascript">
+      function appendWord(message) {
+        var pre = document.getElementById('content');
+        var textContent = document.createElement('a');
+        textContent.setAttribute("href", "https://www.google.se/search?q=" + message + "&tbm=nws&tbs=ctr:countrySE");
+        textContent.setAttribute("target", "_blank");
+        textContent.innerHTML = message.replace(/^Corona/i, "");
+        pre.appendChild(textContent);
+      }
+
+      function listLocalWords(){
+            for (i = 0; i < allWords.length; i++) {
+              appendWord(allWords[i]);
+            }
+
+            let total = document.querySelector("#total");
+            total.innerHTML = allWords.length;
+      }
+
+      document.querySelector("#content").addEventListener("scroll", function(ev){
+        document.querySelector("#current").innerHTML = Math.floor(1+ ev.target.scrollTop/72);
+      });
+
+      window.addEventListener("load", function(){
+        let rand = Math.floor(Math.random()*subTitles.length);
+        document.querySelector("#subtitle").innerHTML = subTitles[ rand ];
+        listLocalWords();
+      });
+    </script>
+  </body>
+</html>

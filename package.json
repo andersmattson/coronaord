@@ -1,0 +1,28 @@
+{
+  "name": "coronaord",
+  "version": "1.0.0",
+  "description": "Sammansatta ord som börjar på Corona-",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node fetchwords.js",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andersmattson/coronaord.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andersmattson/coronaord/issues"
+  },
+  "homepage": "https://github.com/andersmattson/coronaord#readme",
+  "devDependencies": {
+    "gh-pages": "^2.2.0"
+  },
+  "dependencies": {
+    "googleapis": "^39.2.0",
+    "request": "^2.88.2"
+  }
+}
