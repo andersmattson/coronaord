@@ -118,6 +118,7 @@
     </div>
     
     <script src="subtitles.js"></script>
+    <script src="words.js"></script>
     <script type="text/javascript">
       function handleClientLoad() {
         gapi.load('client:auth2', initClient);
@@ -139,7 +140,7 @@
       function appendWord(message) {
         var pre = document.getElementById('content');
         var textContent = document.createElement('a');
-        textContent.setAttribute("href", "https://www.google.se/search?q=" + message + "&tbm=nws");
+        textContent.setAttribute("href", "https://www.google.se/search?q=" + message + "&tbm=nws&tbs=ctr:countrySE");
         textContent.setAttribute("target", "_blank");
         textContent.innerHTML = message.replace(/^Corona/i, "");
         pre.appendChild(textContent);
@@ -167,12 +168,21 @@
         });
       }
 
+      function listLocalWords(){
+            for (i = 0; i < allWords.length; i++) {
+              appendWord(allWords[i]);
+            }
+
+            let total = document.querySelector("#total");
+            total.innerHTML = allWords.length;
+      }
+
     </script>
 
-    <script async defer src="https://apis.google.com/js/api.js"
+    <!--script async defer src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
-    </script>
+    </script-->
     <script>
       document.querySelector("#content").addEventListener("scroll", function(ev){
         document.querySelector("#current").innerHTML = Math.floor(1+ ev.target.scrollTop/72);
@@ -181,6 +191,7 @@
       window.addEventListener("load", function(){
         let rand = Math.floor(Math.random()*subTitles.length);
         document.querySelector("#subtitle").innerHTML = subTitles[ rand ];
+        listLocalWords();
       });
     </script>
   </body>
