@@ -1,5 +1,5 @@
 var subTitles = [
-    "Bask in the glory of medias uppfinningsrikedom",
+    "Bask in the glory of medias uppfinningsrikedom.",
     "Alla ord utom öl.",
     "Sammansatta smittoord.",
     "Svenska Akademien ska ju också ha något att göra.",
