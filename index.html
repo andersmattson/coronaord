@@ -69,7 +69,6 @@
         overflow: auto;
         max-height: 100%;
         scroll-padding-top: 50vh;
-        scroll-behavior: smooth;
       }
       #content a {
         scroll-snap-align: start;
@@ -103,80 +102,6 @@
         position: absolute;
       }
 
-      #curated {
-        position: absolute;
-        left: 13px;
-        bottom: 10px;
-        color: #555;
-        font-size: 12px;
-      }
-
-      #love {
-        color: #900;
-      }
-
-      #saol {
-        max-width: 350px;
-        margin-top: 20px;
-        color: #999;
-      }
-
-      #saol .prediv, #saol .spaltnr, #saol a, #saol .kt, #saol .visainte {
-        display: none;
-      }
-
-      #saol a.ordklass {
-        display: inline;
-        padding-right: 5px;
-      }
-
-      #saol .lexem {
-        margin-top: 10px;
-        display: block;
-      }
-
-      #saol .lemma {
-        margin-bottom: 10px;
-        display: block;
-      }
-
-      #saol .homonr {
-        vertical-align: super;
-        font-weight: bold;
-        color: #fff;
-      }
-
-      #saol .grundform, #saol .grundform_ptv  {
-        font-weight: bold;
-        color: #fff;
-        padding-right: 5px;
-      }
-
-      #saol .uttal {
-        padding-right: 5px;
-      }
-
-      #saol table {
-        display: none;
-      }
-
-      #saol th {
-        text-align: left;
-        padding-top: 10px;
-      }
-
-      #saol .def {
-        margin-top: 5px;
-      }
-
-      #saol .nodef {
-        font-style: italic;
-      }
-
-      #saol .bojning {
-        font-style: italic;
-      }
-
     </style>
   </head>
   <body>
@@ -185,10 +110,8 @@
         <h1>CORONAORD</h1>
         <div id="subtitle">&nbsp;</div>
         <div id="count">No. <span id="current">1</span> av <span id="total">#</span></div>
-        <div id="saol"></div>
       </div>
       <div id="corona">Corona</div>
-      <div id="curated">Kurerad med <span id="love">&#9829;</span> av Anders Mattson</div>
     </div>
     <div id="rightside">
       <div id="content"></div>
@@ -196,15 +119,12 @@
     
     <script src="subtitles.js"></script>
     <script src="words.js"></script>
-    <script src="saol.js"></script>
     <script type="text/javascript">
-      var displaySaolTimeout;
-
       function appendWord(message) {
         var pre = document.getElementById('content');
         var textContent = document.createElement('a');
-        //textContent.setAttribute("href", "https://www.google.se/search?q=" + message + "&tbm=nws&tbs=ctr:countrySE");
-        //textContent.setAttribute("target", "_blank");
+        textContent.setAttribute("href", "https://www.google.se/search?q=" + message + "&tbm=nws&tbs=ctr:countrySE");
+        textContent.setAttribute("target", "_blank");
         textContent.innerHTML = message.replace(/^Corona/i, "");
         pre.appendChild(textContent);
       }
@@ -219,29 +139,13 @@
       }
 
       document.querySelector("#content").addEventListener("scroll", function(ev){
-        var index = Math.floor(1+ ev.target.scrollTop/72);
-        document.querySelector("#current").innerHTML = index;
-        if(displaySaolTimeout) {
-          clearTimeout(displaySaolTimeout);
-        }
-        displaySaolTimeout = setTimeout(showSaol, 700);
+        document.querySelector("#current").innerHTML = Math.floor(1+ ev.target.scrollTop/72);
       });
-
-      let showSaol = function(){
-        var index = Math.floor(1+ document.querySelector("#content").scrollTop/72);
-        var elem = document.querySelectorAll("#content a")[index-1];
-        if(wordsObj[elem.textContent]){
-          document.querySelector("#saol").innerHTML = wordsObj[elem.textContent];
-        } else {
-          document.querySelector("#saol").innerHTML = '<span class="nodef">Definitionen hittades inte.</span>';
-        }
-      }
 
       window.addEventListener("load", function(){
         let rand = Math.floor(Math.random()*subTitles.length);
         document.querySelector("#subtitle").innerHTML = subTitles[ rand ];
         listLocalWords();
-        showSaol();
       });
     </script>
   </body>
