@@ -271,7 +271,7 @@
       }
 
       document.querySelector("#content").addEventListener("scroll", function(ev){
-        var index = Math.floor(1+ ev.target.scrollTop/72);
+        var index = Math.floor(1+ ev.target.scrollTop/ev.target.offsetHeight);
         document.querySelector("#current").innerHTML = index;
         if(displaySaolTimeout) {
           clearTimeout(displaySaolTimeout);
