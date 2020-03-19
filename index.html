@@ -12,16 +12,14 @@
     </script>
     <title>Coronaord</title>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
     <meta property="og:title" content="Coronaord - en samling sammansatta kvällspostord.">
     <meta property="og:description" content="SAOL kommer att ha fullt upp inför nästa revision.">
     <meta property="og:image" content="http://coronaord.se/thumbnail.jpg">
     <meta property="og:url" content="http://coronaord.se/index.html">
     <meta name="twitter:card" content="summary_large_image">
-    <style type="text/css">
+    <style>
       body, html {
         font-family: Helvetica, Arial, sans-serif;
-        font-size: calc(100vw/55);
         background-color: #000;
         color: #fff;
         overflow: hidden;
@@ -29,16 +27,8 @@
         margin: 0;
       }
 
-      body {
-        font-size: 1rem;
-      }
-
-      .lbsmall {
-        display: none;
-      }
-
       h1 {
-        font-size: 3rem;
+        font-size: 45px;
         color: #eee;
         margin-bottom: 10px;
         margin-top: 0px;
@@ -47,7 +37,7 @@
       #leftside {
         position: absolute;
         box-sizing: border-box;
-        right: 50vw;
+        right: 50%;
         top: 0;
         left: 0;
         bottom: 0;
@@ -56,7 +46,7 @@
       #rightside {
         position: absolute;
         top: 0;
-        left: 50vw;
+        left: 50%;
         bottom: 0;
         right: 0;
       }
@@ -70,7 +60,7 @@
       }
 
       #content, #corona {
-        font-size: 4rem;
+        font-size: 60px;
         line-height: 1.2em;
       }
 
@@ -96,31 +86,27 @@
       }
 
       #count {
-        font-size: 2rem;
+        font-size: 30px;
         font-weight: normal;
       }
 
       #subtitle {
         font-weight: normal;
-        font-size: 1.25rem;
+        font-size: 20px;
         margin-bottom: 30px;
         max-width: 300px;
         line-height: 1.4em;
       }
 
       #titles {
-        padding: 3rem;
+        padding: 50px;
         position: absolute;
-        box-sizing: border-box;
       }
 
       #curated {
         position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        box-sizing: border-box;
-        padding: 0 20px 10px 13px;
+        left: 13px;
+        bottom: 10px;
         color: #555;
         font-size: 12px;
       }
@@ -197,37 +183,6 @@
         font-style: italic;
       }
 
-      @media screen and (min-width: 768px) {
-        html {
-          font-size: 14px;
-        }
-      }
-
-      @media screen and (max-width: 600px) {
-        div#subtitle {
-          font-size: 1.5rem;
-        }
-
-        #saol {
-          font-size: 1.4rem;
-        }
-      }
-
-      @media screen and (max-width: 900px){
-        #content, #corona {
-          font-size: 3rem;
-          line-height: 1.2em;
-        }
-
-      }
-
-      @media screen and (max-width: 480px){
-        .lbsmall {
-          display: unset;
-        }
-
-      }
-
     </style>
   </head>
   <body>
@@ -239,7 +194,7 @@
         <div id="saol"></div>
       </div>
       <div id="corona">Corona</div>
-      <div id="curated">Kurerad med <span id="love">&#9829;</span><br class="lbsmall" /> av Anders Mattson <br>Uppslagsord hämtade från <a href="https://svenska.se" target="_blank">svenska.se</a>.</div>
+      <div id="curated">Kurerad med <span id="love">&#9829;</span> av Anders Mattson <br>Uppslagsord hämtade från <a href="https://svenska.se" target="_blank">svenska.se</a>.</div>
     </div>
     <div id="rightside">
       <div id="content"></div>
@@ -250,7 +205,6 @@
     <script src="saol.js"></script>
     <script type="text/javascript">
       var displaySaolTimeout;
-
 
       function appendWord(message) {
         var pre = document.getElementById('content');
@@ -271,7 +225,7 @@
       }
 
       document.querySelector("#content").addEventListener("scroll", function(ev){
-        var index = Math.floor(1+ ev.target.scrollTop/ev.target.offsetHeight);
+        var index = Math.floor(1+ ev.target.scrollTop/72);
         document.querySelector("#current").innerHTML = index;
         if(displaySaolTimeout) {
           clearTimeout(displaySaolTimeout);
@@ -292,13 +246,8 @@
       window.addEventListener("load", function(){
         let rand = Math.floor(Math.random()*subTitles.length);
         document.querySelector("#subtitle").innerHTML = subTitles[ rand ];
-        
-
-        
         listLocalWords();
         showSaol();
-
-
       });
     </script>
   </body>
