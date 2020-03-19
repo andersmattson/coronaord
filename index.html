@@ -271,7 +271,8 @@
       }
 
       document.querySelector("#content").addEventListener("scroll", function(ev){
-        var index = Math.floor(1+ ev.target.scrollTop/ev.target.offsetHeight);
+        var item = document.querySelector("#content a:first-child");
+        var index = Math.floor(1+ ev.target.scrollTop/item.offsetHeight);
         document.querySelector("#current").innerHTML = index;
         if(displaySaolTimeout) {
           clearTimeout(displaySaolTimeout);
@@ -280,7 +281,9 @@
       });
 
       let showSaol = function(){
-        var index = Math.floor(1+ document.querySelector("#content").scrollTop/document.querySelector("#content").offsetHeight);
+        var content = document.querySelector("#content");
+        var item = document.querySelector("#content a:first-child");
+        var index = Math.floor(1+ content.scrollTop/item.offsetHeight);
         var elem = document.querySelectorAll("#content a")[index-1];
         if(wordsObj[elem.textContent]){
           document.querySelector("#saol").innerHTML = wordsObj[elem.textContent];
