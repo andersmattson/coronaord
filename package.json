@@ -22,7 +22,7 @@
     "gh-pages": "^2.2.0"
   },
   "dependencies": {
-    "jsdom": "^16.2.1",
+    "jsdom": "^16.5.0",
     "request": "^2.88.2",
     "sanitize-html": "^1.22.1"
   }
